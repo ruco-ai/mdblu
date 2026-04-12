@@ -55,6 +55,62 @@ Every template includes YAML frontmatter with `title`, `type`, and `tags` fields
 
 ---
 
+## CLI
+
+mdblu ships as an npm package with a CLI for scaffolding templates directly into any project.
+
+### Install
+
+```bash
+npm install -g mdblu
+# or use without installing:
+npx mdblu
+```
+
+### Commands
+
+**List available templates:**
+
+```bash
+mdblu list
+```
+
+Fetches and prints all available templates from the repository.
+
+**Download specific templates:**
+
+```bash
+mdblu get SPEC.md MISSION.md
+```
+
+Downloads the named templates into `.mdblu/templates/` and writes a `CLAUDE.md` stub to `.mdblu/CLAUDE.md`.
+
+**Download all templates:**
+
+```bash
+mdblu get --all
+```
+
+**Interactive mode** (no arguments):
+
+```bash
+mdblu
+```
+
+Displays a numbered checklist of all available templates. Enter comma-separated indices or `all` to scaffold your selection.
+
+### Scaffold output
+
+Running any `get` command creates:
+
+```
+.mdblu/
+  templates/   ← downloaded .template files
+  CLAUDE.md    ← always written
+```
+
+---
+
 ## MCP Server
 
 mdblu runs as an MCP server at `https://mdblu.fly.dev/mcp`, so any MCP-compatible AI tool can pull templates on demand.
