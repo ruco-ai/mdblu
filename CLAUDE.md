@@ -2,6 +2,32 @@
 
 This repo is a collection of markdown templates for AI-assisted software development workflows. Each template is filled by the AI from a prompt and output as a structured document.
 
+The repo also ships as an npm package (`mdblu`) with a CLI that lets users scaffold a `.mdblu/` directory containing downloaded templates and a `CLAUDE.md` stub.
+
+---
+
+## CLI
+
+The CLI lives in `bin/mdblu.js` and is declared as the `mdblu` bin in `package.json`. It has zero runtime dependencies (Node built-ins only: `https`, `fs`, `readline`). Requires Node >=18.
+
+### Commands
+
+- `mdblu list` — fetches the template list from the GitHub Contents API and prints all available `.template` files with readable names.
+- `mdblu get <name>... [--all]` — downloads the specified templates (or all with `--all`) into `.mdblu/templates/` and writes `CLAUDE.md` to `.mdblu/CLAUDE.md`.
+- `mdblu` (no args) — interactive mode: displays a numbered checklist, accepts comma-separated indices or `all`, then scaffolds.
+
+### Scaffold output
+
+```
+.mdblu/
+  templates/   ← downloaded .template files
+  CLAUDE.md    ← always written
+```
+
+### Publishing
+
+The package has not yet been published to npm. Run `npm publish` (requires npm credentials) to publish.
+
 ---
 
 ## When to Use Each Template
