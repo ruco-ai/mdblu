@@ -91,6 +91,20 @@ Downloads the named templates into `.mdblu/templates/` and writes a `CLAUDE.md` 
 mdblu get --all
 ```
 
+**Update already-scaffolded templates:**
+
+```bash
+mdblu update
+```
+
+Re-downloads all templates currently present in `.mdblu/templates/`, pulling in any upstream changes. Does not modify `.mdblu/CLAUDE.md`.
+
+```bash
+mdblu update SPEC.md MISSION.md
+```
+
+Updates only the named templates. Each template is reported as updated, skipped (not found upstream), or failed. Exits with code 1 if any template fails.
+
 **Interactive mode** (no arguments):
 
 ```bash

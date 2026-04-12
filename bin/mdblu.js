@@ -120,6 +120,66 @@ async function cmdGet(args) {
   await scaffoldTemplates(templates, cwd);
 }
 
+async function cmdUpdate(args) {
+  const cwd = process.cwd();
+  const templatesDir = path.join(cwd, SCAFFOLD_DIR, 'templates');
+
+  if (!fs.existsSync(templatesDir)) {
+    console.error(`Error: no scaffolded templates found at ${SCAFFOLD_DIR}/templates/`);
+    console.error('Run `mdblu get --all` to scaffold templates first.');
+    process.exit(1);
+  }
+
+  const requested = args.filter((a) => !a.startsWith('-'));
+  let toUpdate;
+
+  if (requested.length > 0) {
+    // Selective update: use names provided
+    toUpdate = requested.map((name) => {
+      const normalized = name.toLowerCase().endsWith('.template') ? name : name + '.template';
+      return normalized;
+    });
+  } else {
+    // Update all present templates
+    const present = fs.readdirSync(templatesDir).filter((f) => f.endsWith('.template'));
+    if (present.length === 0) {
+      console.error(`No templates found in ${SCAFFOLD_DIR}/templates/`);
+      process.exit(1);
+    }
+    toUpdate = present;
+    console.log(`Updating all ${toUpdate.length} present template(s)...\n`);
+  }
+
+  const upstream = await fetchTemplateList();
+  const upstreamSet = new Set(upstream.map((n) => n.toLowerCase()));
+
+  let updated = 0, skipped = 0, failed = 0;
+
+  for (const name of toUpdate) {
+    const normalized = name.toLowerCase().endsWith('.template') ? name : name + '.template';
+    if (!upstreamSet.has(normalized.toLowerCase())) {
+      console.log(`  ${name.replace('.template', '')}: skipped (not found upstream)`);
+      skipped++;
+      continue;
+    }
+    // Find the canonical casing from upstream
+    const canonical = upstream.find((u) => u.toLowerCase() === normalized.toLowerCase());
+    process.stdout.write(`  ${canonical.replace('.template', '')}: updating... `);
+    try {
+      const content = await fetchRawFile(`${TEMPLATES_PATH}/${canonical}`);
+      writeFile(path.join(templatesDir, canonical), content);
+      console.log('done');
+      updated++;
+    } catch (err) {
+      console.log(`failed (${err.message})`);
+      failed++;
+    }
+  }
+
+  console.log(`\n${updated} updated, ${skipped} skipped, ${failed} failed.`);
+  if (failed > 0) process.exit(1);
+}
+
 async function cmdInteractive() {
   const templates = await fetchTemplateList();
 
@@ -161,11 +221,13 @@ async function main() {
       await cmdList();
     } else if (cmd === 'get' || cmd === 'download') {
       await cmdGet(args.slice(1));
+    } else if (cmd === 'update') {
+      await cmdUpdate(args.slice(1));
     } else if (!cmd) {
       await cmdInteractive();
     } else {
       console.error(`Unknown command: ${cmd}`);
-      console.error('Usage: mdblu [list | get <name>... | get --all]');
+      console.error('Usage: mdblu [list | get <name>... | get --all | update [<name>...]]');
       process.exit(1);
     }
   } catch (err) {
