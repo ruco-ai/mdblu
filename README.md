@@ -55,6 +55,8 @@ All templates live in [`/templates`](templates/) and are open for contribution.
 
 mdblu runs as an MCP server at `https://mdblu.fly.dev/mcp`, so any MCP-compatible AI tool can pull templates on demand.
 
+The server reads templates and `CLAUDE.md` directly from this repository at request time — no redeploy needed when templates change. Responses are cached for 5 minutes.
+
 ### Add to Claude Code
 
 ```bash
@@ -86,6 +88,16 @@ https://mdblu.fly.dev/mcp
 
 with transport `http`. No auth required.
 
+### Available tools and prompts
+
+| Name | Type | Description |
+|---|---|---|
+| `list_templates` | tool | List all available templates |
+| `get_template` | tool | Fetch a template by name |
+| `propose_template_update` | tool | Open a GitHub PR with an improved version of a template |
+| `how_to_use` | prompt | Instructs the agent to pick and fill the right template |
+| `propose_update` | prompt | Instructs the agent to critically evaluate and propose a template improvement |
+
 ---
 
 ## Usage
@@ -114,6 +126,8 @@ mdblu is intentionally open and collaborative. Templates are plain Markdown — 
 4. Open a PR
 
 The rule: **every template change must be paired with a CLAUDE.md update.** Templates without a corresponding CLAUDE.md entry won't be used correctly by agents.
+
+**AI-assisted contributions** — any agent connected to the MCP server can propose template improvements directly by using the `propose_update` prompt. It will open a PR only if the change clears the bar: durable improvement, structural gap, no task-specific bleed, minimal diff.
 
 ---
 
