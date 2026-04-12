@@ -85,6 +85,12 @@ mdblu get SPEC.md MISSION.md
 
 Downloads the named templates into `.mdblu/templates/` and writes a `CLAUDE.md` stub to `.mdblu/CLAUDE.md`.
 
+Use `--output <dir>` to scaffold into a custom directory instead of `.mdblu/`:
+
+```bash
+mdblu get SPEC.md MISSION.md --output my-docs
+```
+
 **Download all templates:**
 
 ```bash
@@ -113,14 +119,20 @@ mdblu
 
 Displays a numbered checklist of all available templates. Enter comma-separated indices or `all` to scaffold your selection.
 
+Use `--output <dir>` to scaffold into a custom directory:
+
+```bash
+mdblu --output my-docs
+```
+
 ### Scaffold output
 
-Running any `get` command creates:
+Running any `get` command (or interactive mode) creates:
 
 ```
-.mdblu/
-  templates/   ← downloaded .template files
-  CLAUDE.md    ← always written
+<output-dir>/        ← defaults to .mdblu/
+  templates/         ← downloaded .template files
+  CLAUDE.md          ← always written
 ```
 
 ---

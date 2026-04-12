@@ -13,16 +13,16 @@ The CLI lives in `bin/mdblu.js` and is declared as the `mdblu` bin in `package.j
 ### Commands
 
 - `mdblu list` — fetches the template list from the GitHub Contents API and prints all available `.template` files with readable names.
-- `mdblu get <name>... [--all]` — downloads the specified templates (or all with `--all`) into `.mdblu/templates/` and writes `CLAUDE.md` to `.mdblu/CLAUDE.md`.
+- `mdblu get <name>... [--all] [--output <dir>]` — downloads the specified templates (or all with `--all`) into `<dir>/templates/` and writes `CLAUDE.md` to `<dir>/CLAUDE.md`. Defaults to `.mdblu/` when `--output` is omitted.
 - `mdblu update [<name>...]` — re-downloads and refreshes already-scaffolded templates in `.mdblu/templates/`. With no arguments, updates all present templates; with names, updates only those. Does not update `CLAUDE.md`. Exits with code 1 if any template fails.
-- `mdblu` (no args) — interactive mode: displays a numbered checklist, accepts comma-separated indices or `all`, then scaffolds.
+- `mdblu [--output <dir>]` (no args) — interactive mode: displays a numbered checklist, accepts comma-separated indices or `all`, then scaffolds. Defaults to `.mdblu/` when `--output` is omitted.
 
 ### Scaffold output
 
 ```
-.mdblu/
-  templates/   ← downloaded .template files
-  CLAUDE.md    ← always written
+<output-dir>/          ← defaults to .mdblu/
+  templates/           ← downloaded .template files
+  CLAUDE.md            ← always written
 ```
 
 ### Publishing
