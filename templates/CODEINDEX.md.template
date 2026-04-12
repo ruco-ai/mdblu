@@ -1,4 +1,7 @@
 ---
+title: "Code Index"
+type: metadata
+tags: [metadata, reference, developer-guide]
 repo_url: {{REPO_URL}}
 last_indexed: {{DATE}}
 tool_version: {{TOOL_VERSION}}

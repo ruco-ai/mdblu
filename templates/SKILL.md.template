@@ -1,3 +1,9 @@
+---
+title: "Agent Skill"
+type: documentation
+tags: [documentation, agent-skill, ai-workflow]
+---
+
 # Skill: {{PROJECT_NAME}}
 
 **Date:** {{DATE}}

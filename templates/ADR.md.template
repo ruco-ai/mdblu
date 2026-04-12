@@ -1,3 +1,9 @@
+---
+title: "Architectural Decision Record"
+type: documentation
+tags: [documentation, architecture, decision]
+---
+
 # ADR-XXXX: {{PROJECT_NAME}}
 
 **Date:** {{DATE}}

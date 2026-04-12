@@ -1,3 +1,9 @@
+---
+title: "Project README"
+type: documentation
+tags: [documentation, reference]
+---
+
 # {{PROJECT_NAME}}
 
 > {{PROMPT}}

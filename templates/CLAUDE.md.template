@@ -1,3 +1,9 @@
+---
+title: "Claude Agent Context"
+type: implementation
+tags: [agent-context, ai-workflow, reference]
+---
+
 # Claude Agent Context: {{PROJECT_NAME}}
 
 **Date:** {{DATE}}

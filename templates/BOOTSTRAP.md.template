@@ -1,3 +1,9 @@
+---
+title: "Bootstrap Task List"
+type: planning
+tags: [planning, task-management, scoping]
+---
+
 # Bootstrap: {{PROJECT_NAME}}
 
 **Date:** {{DATE}}

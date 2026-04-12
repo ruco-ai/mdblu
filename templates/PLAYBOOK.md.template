@@ -1,3 +1,9 @@
+---
+title: "Operational Playbook"
+type: documentation
+tags: [documentation, runbook, reference]
+---
+
 # Playbook: {{PROJECT_NAME}}
 
 **Date:** {{DATE}}
