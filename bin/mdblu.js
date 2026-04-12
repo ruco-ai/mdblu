@@ -58,8 +58,8 @@ function writeFile(filePath, content) {
   fs.writeFileSync(filePath, content, 'utf8');
 }
 
-async function scaffoldTemplates(templateNames, cwd) {
-  const scaffoldRoot = path.join(cwd, SCAFFOLD_DIR);
+async function scaffoldTemplates(templateNames, cwd, outputDir) {
+  const scaffoldRoot = outputDir ? path.resolve(cwd, outputDir) : path.join(cwd, SCAFFOLD_DIR);
   const templatesDir = path.join(scaffoldRoot, 'templates');
   ensureDir(templatesDir);
 
@@ -90,8 +90,17 @@ async function cmdList() {
   console.log(`\n${templates.length} templates available.`);
 }
 
+function parseOutputFlag(args) {
+  const idx = args.indexOf('--output');
+  if (idx !== -1 && args[idx + 1]) {
+    return { outputDir: args[idx + 1], rest: args.filter((_, i) => i !== idx && i !== idx + 1) };
+  }
+  return { outputDir: null, rest: args };
+}
+
 async function cmdGet(args) {
-  const all = args.includes('--all') || args.includes('-a');
+  const { outputDir, rest } = parseOutputFlag(args);
+  const all = rest.includes('--all') || rest.includes('-a');
   const cwd = process.cwd();
 
   let templates = await fetchTemplateList();
@@ -100,10 +109,10 @@ async function cmdGet(args) {
     console.log(`Downloading all ${templates.length} templates...\n`);
   } else {
     // Filter by name args (strip .template suffix for matching)
-    const requested = args.filter((a) => !a.startsWith('-'));
+    const requested = rest.filter((a) => !a.startsWith('-'));
     if (requested.length === 0) {
       console.error('Error: specify template names or use --all');
-      console.error('Usage: mdblu get <name> [<name>...] [--all]');
+      console.error('Usage: mdblu get <name> [<name>...] [--all] [--output <dir>]');
       process.exit(1);
     }
     templates = templates.filter((t) => {
@@ -117,7 +126,7 @@ async function cmdGet(args) {
     console.log(`Downloading ${templates.length} template(s)...\n`);
   }
 
-  await scaffoldTemplates(templates, cwd);
+  await scaffoldTemplates(templates, cwd, outputDir);
 }
 
 async function cmdUpdate(args) {
@@ -180,7 +189,8 @@ async function cmdUpdate(args) {
   if (failed > 0) process.exit(1);
 }
 
-async function cmdInteractive() {
+async function cmdInteractive(args) {
+  const { outputDir } = parseOutputFlag(args);
   const templates = await fetchTemplateList();
 
   console.log('Select templates to download (space to toggle, enter to confirm):\n');
@@ -208,7 +218,7 @@ async function cmdInteractive() {
       }
     }
     console.log(`\nDownloading ${selected.length} template(s)...\n`);
-    await scaffoldTemplates(selected, process.cwd());
+    await scaffoldTemplates(selected, process.cwd(), outputDir);
   });
 }
 
@@ -224,10 +234,10 @@ async function main() {
     } else if (cmd === 'update') {
       await cmdUpdate(args.slice(1));
     } else if (!cmd) {
-      await cmdInteractive();
+      await cmdInteractive(args);
     } else {
       console.error(`Unknown command: ${cmd}`);
-      console.error('Usage: mdblu [list | get <name>... | get --all | update [<name>...]]');
+      console.error('Usage: mdblu [list | get <name>... | get --all | update [<name>...]] [--output <dir>]');
       process.exit(1);
     }
   } catch (err) {
