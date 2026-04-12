@@ -14,6 +14,7 @@ The CLI lives in `bin/mdblu.js` and is declared as the `mdblu` bin in `package.j
 
 - `mdblu list` — fetches the template list from the GitHub Contents API and prints all available `.template` files with readable names.
 - `mdblu get <name>... [--all]` — downloads the specified templates (or all with `--all`) into `.mdblu/templates/` and writes `CLAUDE.md` to `.mdblu/CLAUDE.md`.
+- `mdblu update [<name>...]` — re-downloads and refreshes already-scaffolded templates in `.mdblu/templates/`. With no arguments, updates all present templates; with names, updates only those. Does not update `CLAUDE.md`. Exits with code 1 if any template fails.
 - `mdblu` (no args) — interactive mode: displays a numbered checklist, accepts comma-separated indices or `all`, then scaffolds.
 
 ### Scaffold output
