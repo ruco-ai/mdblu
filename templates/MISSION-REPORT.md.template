@@ -1,3 +1,9 @@
+---
+title: "Mission Report"
+type: post-implementation
+tags: [reporting, retrospective, ai-workflow]
+---
+
 # Mission Report: {{PROJECT_NAME}}
 
 **Date:** {{DATE}}

@@ -1,3 +1,9 @@
+---
+title: "Codebase Structure"
+type: documentation
+tags: [documentation, architecture, reference]
+---
+
 # Structure: {{PROJECT_NAME}}
 
 **Date:** {{DATE}}

@@ -49,6 +49,10 @@ They are interdependent: adding or updating a template always means updating CLA
 
 All templates live in [`/templates`](templates/) and are open for contribution.
 
+### Template Metadata
+
+Every template includes YAML frontmatter with `title`, `type`, and `tags` fields. Tags enable tools and agents to filter, categorize, and index templates by metadata without parsing prose. The full tag taxonomy and a cross-reference table mapping each template to its tags are defined in [`TAGS.md`](TAGS.md) at the repo root.
+
 ---
 
 ## MCP Server
@@ -123,7 +127,8 @@ mdblu is intentionally open and collaborative. Templates are plain Markdown — 
 1. Fork the repo
 2. Add or edit the template in `/templates`
 3. Update `CLAUDE.md` — add or revise the entry that tells agents when and how to use the template
-4. Open a PR
+4. Add tags to the template's YAML frontmatter using the taxonomy in `TAGS.md`; update `TAGS.md` if introducing a new tag
+5. Open a PR
 
 The rule: **every template change must be paired with a CLAUDE.md update.** Templates without a corresponding CLAUDE.md entry won't be used correctly by agents.
 

@@ -1,3 +1,9 @@
+---
+title: "Developer Guide"
+type: documentation
+tags: [documentation, developer-guide, reference]
+---
+
 # Developer Guide: {{PROJECT_NAME}}
 
 **Date:** {{DATE}}

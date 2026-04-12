@@ -1,3 +1,9 @@
+---
+title: "Handoff Document"
+type: post-implementation
+tags: [handoff, documentation, reporting]
+---
+
 # Handoff: {{PROJECT_NAME}}
 
 **Date:** {{DATE}}

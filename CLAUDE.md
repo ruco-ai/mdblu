@@ -78,3 +78,4 @@ This repo is a collection of markdown templates for AI-assisted software develop
 - Remove all HTML comments (`<!-- ... -->`) from the final output.
 - Do not add, remove, or reorder sections unless a template says otherwise.
 - Tag tasks and actions [BOT] or [HUMAN] wherever the template calls for it.
+- Every template includes YAML frontmatter with `title`, `type`, and `tags` fields. Do not remove or modify these fields when filling a template. Refer to `TAGS.md` at the repo root for the full tag taxonomy and definitions.

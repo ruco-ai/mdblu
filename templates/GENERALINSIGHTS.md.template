@@ -1,4 +1,7 @@
 ---
+title: "General Insights"
+type: metadata
+tags: [metadata, insights, ai-workflow]
 last_updated: {{DATE}}
 tool_version: {{TOOL_VERSION}}
 privacy: local-in-v0 | collective-in-v1
