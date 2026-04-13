@@ -1,3 +1,9 @@
+---
+title: "Coding Notes"
+type: implementation
+tags: [implementation, conventions, ai-workflow]
+---
+
 # Coding Notes: {{PROJECT_NAME}}
 
 **Date:** {{DATE}}

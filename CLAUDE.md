@@ -2,6 +2,33 @@
 
 This repo is a collection of markdown templates for AI-assisted software development workflows. Each template is filled by the AI from a prompt and output as a structured document.
 
+The repo also ships as an npm package (`mdblu`) with a CLI that lets users scaffold a `.mdblu/` directory containing downloaded templates and a `CLAUDE.md` stub.
+
+---
+
+## CLI
+
+The CLI lives in `bin/mdblu.js` and is declared as the `mdblu` bin in `package.json`. It has zero runtime dependencies (Node built-ins only: `https`, `fs`, `readline`). Requires Node >=18.
+
+### Commands
+
+- `mdblu list` — fetches the template list from the GitHub Contents API and prints all available `.template` files with readable names.
+- `mdblu get <name>... [--all] [--output <dir>]` — downloads the specified templates (or all with `--all`) into `<dir>/templates/` and writes `CLAUDE.md` to `<dir>/CLAUDE.md`. Defaults to `.mdblu/` when `--output` is omitted.
+- `mdblu update [<name>...]` — re-downloads and refreshes already-scaffolded templates in `.mdblu/templates/`. With no arguments, updates all present templates; with names, updates only those. Does not update `CLAUDE.md`. Exits with code 1 if any template fails.
+- `mdblu [--output <dir>]` (no args) — interactive mode: displays a numbered checklist, accepts comma-separated indices or `all`, then scaffolds. Defaults to `.mdblu/` when `--output` is omitted.
+
+### Scaffold output
+
+```
+<output-dir>/          ← defaults to .mdblu/
+  templates/           ← downloaded .template files
+  CLAUDE.md            ← always written
+```
+
+### Publishing
+
+The package has not yet been published to npm. Run `npm publish` (requires npm credentials) to publish.
+
 ---
 
 ## When to Use Each Template
@@ -78,3 +105,4 @@ This repo is a collection of markdown templates for AI-assisted software develop
 - Remove all HTML comments (`<!-- ... -->`) from the final output.
 - Do not add, remove, or reorder sections unless a template says otherwise.
 - Tag tasks and actions [BOT] or [HUMAN] wherever the template calls for it.
+- Every template includes YAML frontmatter with `title`, `type`, and `tags` fields. Do not remove or modify these fields when filling a template. Refer to `TAGS.md` at the repo root for the full tag taxonomy and definitions.

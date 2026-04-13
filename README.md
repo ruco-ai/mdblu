@@ -49,11 +49,99 @@ They are interdependent: adding or updating a template always means updating CLA
 
 All templates live in [`/templates`](templates/) and are open for contribution.
 
+### Template Metadata
+
+Every template includes YAML frontmatter with `title`, `type`, and `tags` fields. Tags enable tools and agents to filter, categorize, and index templates by metadata without parsing prose. The full tag taxonomy and a cross-reference table mapping each template to its tags are defined in [`TAGS.md`](TAGS.md) at the repo root.
+
+---
+
+## CLI
+
+mdblu ships as an npm package with a CLI for scaffolding templates directly into any project.
+
+### Install
+
+```bash
+npm install -g mdblu
+# or use without installing:
+npx mdblu
+```
+
+### Commands
+
+**List available templates:**
+
+```bash
+mdblu list
+```
+
+Fetches and prints all available templates from the repository.
+
+**Download specific templates:**
+
+```bash
+mdblu get SPEC.md MISSION.md
+```
+
+Downloads the named templates into `.mdblu/templates/` and writes a `CLAUDE.md` stub to `.mdblu/CLAUDE.md`.
+
+Use `--output <dir>` to scaffold into a custom directory instead of `.mdblu/`:
+
+```bash
+mdblu get SPEC.md MISSION.md --output my-docs
+```
+
+**Download all templates:**
+
+```bash
+mdblu get --all
+```
+
+**Update already-scaffolded templates:**
+
+```bash
+mdblu update
+```
+
+Re-downloads all templates currently present in `.mdblu/templates/`, pulling in any upstream changes. Does not modify `.mdblu/CLAUDE.md`.
+
+```bash
+mdblu update SPEC.md MISSION.md
+```
+
+Updates only the named templates. Each template is reported as updated, skipped (not found upstream), or failed. Exits with code 1 if any template fails.
+
+**Interactive mode** (no arguments):
+
+```bash
+mdblu
+```
+
+Displays a numbered checklist of all available templates. Enter comma-separated indices or `all` to scaffold your selection.
+
+Use `--output <dir>` to scaffold into a custom directory:
+
+```bash
+mdblu --output my-docs
+```
+
+### Scaffold output
+
+Running any `get` command (or interactive mode) creates:
+
+```
+<output-dir>/        ← defaults to .mdblu/
+  templates/         ← downloaded .template files
+  CLAUDE.md          ← always written
+```
+
 ---
 
 ## MCP Server
 
 mdblu runs as an MCP server at `https://mdblu.fly.dev/mcp`, so any MCP-compatible AI tool can pull templates on demand.
+
+The server reads templates and `CLAUDE.md` directly from this repository at request time — no redeploy needed when templates change. Responses are cached for 5 minutes.
 
 ### Add to Claude Code
 
@@ -86,6 +174,16 @@ https://mdblu.fly.dev/mcp
 
 with transport `http`. No auth required.
 
+### Available tools and prompts
+
+| Name | Type | Description |
+|---|---|---|
+| `list_templates` | tool | List all available templates |
+| `get_template` | tool | Fetch a template by name |
+| `propose_template_update` | tool | Open a GitHub PR with an improved version of a template |
+| `how_to_use` | prompt | Instructs the agent to pick and fill the right template |
+| `propose_update` | prompt | Instructs the agent to critically evaluate and propose a template improvement |
+
 ---
 
 ## Usage
@@ -111,9 +209,12 @@ mdblu is intentionally open and collaborative. Templates are plain Markdown — 
 1. Fork the repo
 2. Add or edit the template in `/templates`
 3. Update `CLAUDE.md` — add or revise the entry that tells agents when and how to use the template
-4. Open a PR
+4. Add tags to the template's YAML frontmatter using the taxonomy in `TAGS.md`; update `TAGS.md` if introducing a new tag
+5. Open a PR
 
 The rule: **every template change must be paired with a CLAUDE.md update.** Templates without a corresponding CLAUDE.md entry won't be used correctly by agents.
+
+**AI-assisted contributions** — any agent connected to the MCP server can propose template improvements directly by using the `propose_update` prompt. It will open a PR only if the change clears the bar: durable improvement, structural gap, no task-specific bleed, minimal diff.
 
 ---
 
