@@ -43,6 +43,7 @@ This document defines all valid tags used in mdblu template frontmatter. Tags ar
 | `CODING-NOTES.md.template` | `implementation`, `conventions`, `ai-workflow` |
 | `DEV.md.template` | `documentation`, `developer-guide`, `reference` |
 | `GENERALINSIGHTS.md.template` | `metadata`, `insights`, `ai-workflow` |
+| `GH-PROJECT.md.template` | `task-management`, `planning`, `metadata` |
 | `HANDOFF.md.template` | `handoff`, `documentation`, `reporting` |
 | `MISSION-REPORT.md.template` | `reporting`, `retrospective`, `ai-workflow` |
 | `MISSION.md.template` | `planning`, `scoping`, `ai-workflow` |
