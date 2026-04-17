@@ -14,18 +14,20 @@ tags: [task-management, planning, metadata]
 <!--
 INSTRUCTIONS FOR THE MODEL:
 Your output must be this document with every section filled in. Do not write prose, summaries, or commentary outside the template structure.
-The prompt below describes a project, team, or workflow. Use it to define a GitHub Project with appropriate fields and initial items.
+The prompt below describes a project, team, or workflow. Use it to define a GitHub Project with real GitHub issues organised as parent issues and sub-issues.
 
 Rules:
-- Project: fill title, owner (GitHub org or username), visibility (public or private), and a short description.
-- Fields: define custom fields that reflect how this project tracks work. Common choices: Status, Priority, Sprint, Estimate, Due Date. Always include a Status field as SINGLE_SELECT.
-- Field types: TEXT | NUMBER | DATE | SINGLE_SELECT | ITERATION
-- For SINGLE_SELECT fields, list options comma-separated in the Options column. For all other types, leave Options blank.
-- Items: list the initial work items for this project.
-  - type DRAFT: a new draft issue (requires title and body). Leave repo and number blank.
-  - type ISSUE or PR: an existing issue or pull request (requires repo as owner/repo and number). Leave title and body blank.
+- Project: fill title, owner (GitHub username or org), repo (owner/repo where new issues will be created), visibility (public or private), and a short description.
+- Fields: optional custom fields beyond the built-in Status. Do NOT include Status — it is always present in GitHub Projects and cannot be redefined. Leave the table empty if no extra fields are needed.
+  - Field types: TEXT | NUMBER | DATE | SINGLE_SELECT | ITERATION
+  - For SINGLE_SELECT, list options comma-separated in the Options column. Leave Options blank for all other types.
+- Items: all items are real GitHub issues (type ISSUE).
+  - Organise work as parent issues (one per area or epic) with sub-issues for individual tasks.
+  - Parent issues: leave parent blank.
+  - Sub-issues: set parent to the exact title of the parent issue.
   - assignee: GitHub username with @ prefix, or leave blank.
-  - status: must match one of the options defined for the Status field exactly.
+  - status: Todo | In Progress | In Review | Done.
+  - To reference an existing issue or PR instead of creating a new one, add repo (owner/repo) and number columns and fill those instead of title/body/parent.
 - Remove HTML comments from the final output.
 - Do not add, remove, or reorder sections.
 - Do not leave placeholder text or empty required cells.
@@ -43,7 +45,8 @@ Rules:
 | Field | Value |
 |-------|-------|
 | title | {{PROJECT_NAME}} |
-| owner | <!-- GitHub org or username (e.g. my-org or my-username) --> |
+| owner | <!-- GitHub username or org --> |
+| repo | <!-- owner/repo where new issues will be created --> |
 | visibility | <!-- public or private --> |
 | description | <!-- One-sentence summary of the project's purpose --> |
 
@@ -51,22 +54,21 @@ Rules:
 
 ## Fields
 
-<!-- Custom fields for the project. Column order must be preserved. -->
+<!-- Optional extra fields. Do NOT add Status — it is built-in. Leave the table body empty if none are needed. -->
 
 | name | type | options |
 |------|------|---------|
-| Status | SINGLE_SELECT | Todo, In Progress, In Review, Done |
 
 ---
 
 ## Items
 
-<!-- Initial items for the project. Column order must be preserved. -->
-<!-- DRAFT: fill title + body. ISSUE / PR: fill repo (owner/repo) + number. -->
+<!-- All items are real GitHub issues (type ISSUE). Parent issues have no parent value. Sub-issues reference their parent by exact title. -->
 
-| type | title | body | repo | number | assignee | status |
-|------|-------|------|------|--------|----------|--------|
-| DRAFT |  |  |  |  |  | Todo |
+| type | title | body | parent | assignee | status |
+|------|-------|------|--------|----------|--------|
+| ISSUE | <!-- parent issue title --> |  |  | <!-- @username --> | Todo |
+| ISSUE | <!-- sub-issue title --> |  | <!-- exact parent title --> | <!-- @username --> | Todo |
 
 ---
 
