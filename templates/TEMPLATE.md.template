@@ -1,0 +1,129 @@
+---
+title: "New Template: {{TEMPLATE_NAME}}"
+type: reference
+tags: [documentation, ai-workflow]
+---
+
+# Template: {{TEMPLATE_NAME}}
+
+<!--
+INSTRUCTIONS FOR THE MODEL:
+You are authoring a new mdblu template. The output of filling this document IS a
+.md.template file to be contributed to the mdblu library.
+
+Follow every section below. The result must be a complete, immediately usable template
+that any agent can fill correctly without extra explanation.
+
+When done:
+1. Save output as `templates/{{TEMPLATE_NAME}}.md.template` (uppercase, hyphenated)
+2. Propose it to mdblu via the `propose_template_update` MCP tool
+3. The PR description should explain: what the template produces, when to use it,
+   and why no existing template covers this case
+-->
+
+## Identity
+
+**Name:** {{TEMPLATE_NAME}}.md
+**Type:** {{TYPE}}
+**Tags:** {{TAGS}}
+
+<!--
+type: one of — planning | implementation | documentation | reporting | reference
+tags: use existing tags from TAGS.md; propose new ones only if genuinely needed
+Name: uppercase, hyphenated, no spaces — e.g. DEPLOYMENT-RUNBOOK, INTERVIEW-GUIDE, TEST-PLAN
+-->
+
+## Purpose
+
+<!--
+One sentence that completes: "Use when the user wants to..."
+Be specific about the trigger moment. What situation, request, or signal makes an
+agent reach for this template instead of an existing one?
+-->
+
+{{PURPOSE}}
+
+## When NOT to Use
+
+<!--
+List 1-3 cases where a different existing template is the better choice.
+This prevents overlap and helps agents make the right decision.
+-->
+
+- Instead of this, use {{ALTERNATIVE}} when {{CONDITION}}
+
+## Template Content
+
+<!--
+Write the full .md.template content below — exactly as it should appear in the file.
+
+Conventions you MUST follow:
+- Start with YAML frontmatter: title, type, tags
+- Every section gets an HTML comment instructing the filling agent (what to write,
+  what format, what to avoid). These comments are stripped from final output.
+- Tag every task or deliverable line [BOT] or [HUMAN]:
+    [BOT]   — implementable by an AI agent from the document alone
+    [HUMAN] — requires human judgment, review, coordination, or external action
+  A [HUMAN] task is a mandatory checkpoint — it signals the agent to pause and wait.
+- Leave {{PLACEHOLDERS}} for content the filling agent will supply from context.
+- End with the standard footer (replace NAME with this template's name):
+    *Made with [mdblu](https://github.com/ruco-ai/mdblu) · source: `templates/NAME.md.template`*
+- Remove all HTML comments from the final filled output.
+-->
+
+---
+
+\`\`\`
+---
+title: "{{TITLE}}"
+type: {{TYPE}}
+tags: [{{TAGS}}]
+---
+
+# {{HEADING}}
+
+<!--
+INSTRUCTIONS FOR THE MODEL:
+[Write the top-level instruction block here. Explain:
+- What this document produces
+- Any phase structure (e.g. fill section A now, section B at close)
+- The most important rules for filling this specific template
+- What [BOT]/[HUMAN] means in this context
+Remove this comment block from the final output.]
+-->
+
+## {{SECTION_1}}
+
+<!-- [Instruction for section 1: what to write, what format, what not to do] -->
+
+{{CONTENT_1}}
+
+## {{SECTION_2}}
+
+<!-- [Instruction for section 2] -->
+
+- [ ] [BOT]: {{TASK_1}}
+- [ ] [HUMAN]: {{TASK_2}}
+
+---
+*Made with [mdblu](https://github.com/ruco-ai/mdblu) · source: \`templates/{{TEMPLATE_NAME}}.md.template\`*
+\`\`\`
+
+## Contribution Checklist
+
+<!--
+Verify all items before submitting the PR. [BOT] items are machine-checkable.
+[HUMAN] items require author judgment.
+-->
+
+- [ ] [BOT]: YAML frontmatter has title, type, and tags
+- [ ] [BOT]: Every section in the template has an HTML comment instruction
+- [ ] [BOT]: All tasks use [BOT] or [HUMAN] tags
+- [ ] [BOT]: Standard footer present with correct template name
+- [ ] [BOT]: Template name is uppercase and hyphenated
+- [ ] [HUMAN]: No significant overlap with an existing template
+- [ ] [HUMAN]: CLAUDE.md entry written — when to use, which section it belongs in
+- [ ] [HUMAN]: Any new tags added to TAGS.md with definitions
+
+---
+*Made with [mdblu](https://github.com/ruco-ai/mdblu) · source: `templates/TEMPLATE.md.template`*
