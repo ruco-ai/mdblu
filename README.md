@@ -52,6 +52,24 @@ All templates live in [`/templates`](templates/) and are open for contribution.
 
 ---
 
+## Task tagging convention
+
+Templates that include tasks or deliverables tag every item `[BOT]` or `[HUMAN]`:
+
+```markdown
+- [ ] [BOT]: Implement authentication
+- [ ] [HUMAN]: Review security model before deploying
+```
+
+- `[BOT]` — implementable by an AI agent from the document alone
+- `[HUMAN]` — requires human judgment, coordination, or external input
+
+This convention is the contract between a filled document and any workflow tool that processes it. Workflow tools scan for this pattern to create issues, track progress, and sync state — they do not rely on a specific section name, so the pattern works across any template.
+
+**When designing a new template:** if it has tasks, deliverables, or a step sequence, use the `[BOT]`/`[HUMAN]` checkbox format. This makes the template processable by tools without any template-specific parsing logic.
+
+---
+
 ## CLI
 
 mdblu ships as an npm package with a CLI for scaffolding templates directly into any project.
@@ -131,14 +149,6 @@ claude mcp add --transport http mdblu https://mdblu.fly.dev/mcp
 
 ---
 
-## navg8
-
-For GitHub Issues integration and document-driven workflows, see [navg8](https://github.com/ruco-ai/navg8) — the workflow layer built on top of mdblu templates.
-
-navg8 uses the `[BOT]`/`[HUMAN]` checkbox convention found in mdblu templates to create GitHub issues from documents, track task progress as sub-issues, and sync document state back to GitHub automatically.
-
----
-
 ## Usage
 
 Once connected, ask your AI agent to use a template by name:
@@ -174,7 +184,7 @@ The rule: **every template change must be paired with a CLAUDE.md update.**
 
 - **Fill every section.** No placeholders, no empty cells, no "TBD" without a reason.
 - **Remove HTML comments from output.** They're instructions for the model, not content.
-- **Tag agent vs. human work.** `[BOT]` for what an AI can do autonomously. `[HUMAN]` for checkpoints that require judgment.
+- **Tag agent vs. human work.** `[BOT]` for what an AI can do autonomously. `[HUMAN]` for checkpoints that require judgment. Any template with tasks must use this format.
 - **Templates and CLAUDE.md are a pair.** One without the other is incomplete.
 
 ---
