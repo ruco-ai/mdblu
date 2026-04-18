@@ -1,0 +1,82 @@
+---
+title: "{{DISPLAY_NAME}} — Collaborator Profile"
+type: collaborator
+github_login: "{{GITHUB_LOGIN}}"
+timezone: "{{TIMEZONE}}"
+---
+
+<!--
+═══════════════════════════════════════════════════════════════
+COLLABORATOR TEMPLATE — ROUTING PROFILE FOR navg8
+═══════════════════════════════════════════════════════════════
+
+This file lives at .navg8/team/<github-login>.md in your repo.
+navg8 reads it to route [HUMAN] tasks to the right person instead
+of always mentioning the issue author.
+
+Fill every section. The "Route to me when" and "Do NOT route to me
+when" sections are the most important — write them yourself; only
+you know when you should and shouldn't be mentioned.
+
+Remove all HTML comment blocks (<!-- -->) from the final output.
+═══════════════════════════════════════════════════════════════
+-->
+
+# {{DISPLAY_NAME}}
+
+**GitHub:** @{{GITHUB_LOGIN}}
+**Timezone:** {{TIMEZONE}}
+
+---
+
+## Role
+
+**Title:** {{JOB_TITLE}}
+
+{{ONE_SENTENCE_SCOPE_OF_RESPONSIBILITY}}
+
+---
+
+## Expertise
+
+<!-- Freeform tags or bullets — be specific so agents can match them to task descriptions. -->
+
+- {{EXPERTISE_1}}
+- {{EXPERTISE_2}}
+- {{EXPERTISE_3}}
+
+---
+
+## Route to me when
+
+<!-- Explicit trigger conditions — write these yourself. -->
+<!-- Examples: "a task involves pricing or packaging decisions", -->
+<!--           "a UI output needs a readability or accessibility review" -->
+
+- {{ROUTING_CONDITION_1}}
+- {{ROUTING_CONDITION_2}}
+- {{ROUTING_CONDITION_3}}
+
+---
+
+## Do NOT route to me when
+
+<!-- Explicit exclusions — write these yourself. -->
+<!-- Examples: "the task is purely about backend code or infrastructure", -->
+<!--           "it's a quick factual lookup with no judgment required" -->
+
+- {{EXCLUSION_1}}
+- {{EXCLUSION_2}}
+
+---
+
+## Preferred contact
+
+<!-- How you want to be mentioned by navg8. -->
+<!-- Options: issue comment @mention, PR review request, Slack DM (if integrated), etc. -->
+
+{{PREFERRED_CONTACT_METHOD}}
+
+---
+
+*Made with [mdblu](https://github.com/ruco-ai/mdblu) · source: `templates/COLLABORATOR.md.template`*
