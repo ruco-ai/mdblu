@@ -1,0 +1,189 @@
+---
+title: "{{TEMPLATE_TITLE}}"
+type: {{TYPE}}
+tags: [{{TAGS}}]
+---
+
+<!--
+═══════════════════════════════════════════════════════════════
+TEMPLATE AUTHORING GUIDE — READ BEFORE FILLING
+═══════════════════════════════════════════════════════════════
+
+You are authoring a new mdblu template. Your output is a
+complete `.md.template` file, ready to commit to templates/.
+
+Use the prompt below to determine the template's name, type,
+tags, purpose, and section structure.
+
+Fill every {{PLACEHOLDER}}. Replace the scaffold sections with
+the actual sections for the new template. Remove this guide and
+all other HTML comments. The result is the new template file.
+
+───────────────────────────────────────────────────────────────
+FRONTMATTER
+───────────────────────────────────────────────────────────────
+
+Required fields — always present:
+  title   Human-readable name. Example: "Sprint Retrospective"
+  type    One of: planning | implementation | post-implementation
+          | documentation | skill | content
+  tags    2–3 tags from TAGS.md. Syntax: [tag1, tag2, tag3]
+
+Optional fields — skill and routing templates only:
+  description    One sentence: what this skill does and for whom.
+  use_when       One sentence: the precise trigger condition.
+  output_type    One of: strategy | copy | audit | structure |
+                 analysis | recommendation
+  related_skills Array of filenames without extension.
+
+Do not add fields outside this list.
+
+───────────────────────────────────────────────────────────────
+INSTRUCTION BLOCK
+───────────────────────────────────────────────────────────────
+
+Every template has one HTML comment block immediately after
+frontmatter. Opening line must be: INSTRUCTIONS FOR THE MODEL:
+
+Six rules required in every instruction block:
+  1. Your output must be this document with every section filled in.
+  2. Do not write prose, summaries, or commentary outside the structure.
+  3. Replace every {{PLACEHOLDER}} with the appropriate content.
+  4. Remove all HTML comments (including this block) from the output.
+  5. Do not add, remove, or reorder sections.
+  6. Do not leave any section empty or containing placeholder text.
+
+Add template-specific rules after the six common rules.
+
+───────────────────────────────────────────────────────────────
+PLACEHOLDERS
+───────────────────────────────────────────────────────────────
+
+Syntax: {{UPPERCASE_SNAKE_CASE}}
+
+Standard placeholders:
+  {{PROJECT_NAME}}  Name of the project
+  {{DATE}}          ISO date (YYYY-MM-DD)
+  {{AUTHOR}}        Author name or handle
+  {{PROMPT}}        The user's input — always rendered as a blockquote
+
+{{PROMPT}} must appear as a blockquote in the first content
+section: > {{PROMPT}}
+
+Name custom placeholders after the concept they represent.
+  Good: {{API_ENDPOINT}}, {{DECISION_TITLE}}, {{ERROR_TYPE}}
+  Bad:  {{THING}}, {{ITEM}}, {{VALUE}}
+
+───────────────────────────────────────────────────────────────
+SECTION STRUCTURE
+───────────────────────────────────────────────────────────────
+
+H2 (##) for top-level sections. H3 (###) for subsections.
+Avoid H4+ unless embedding a detailed reference guide.
+
+Tables: always include a header separator row (|---|---|).
+If a downstream script parses the table, add this rule to the
+instruction block: "Column order must be preserved."
+
+───────────────────────────────────────────────────────────────
+[BOT] / [HUMAN] TAGS
+───────────────────────────────────────────────────────────────
+
+Use in list items only — never in headings or prose.
+  - <description> [BOT]    implementable by an AI agent
+  - <description> [HUMAN]  requires human judgment or action
+
+A [HUMAN] item is a mandatory checkpoint. Dependent [BOT] items
+may not proceed until it is resolved. Use sparingly.
+
+───────────────────────────────────────────────────────────────
+OPTIONAL SECTIONS
+───────────────────────────────────────────────────────────────
+
+Default: every section is required — never omit.
+
+To allow omission, say so explicitly in the instruction block:
+  "If <condition>, omit this section entirely."
+  OR
+  "If <condition>, write N/A."
+Use one strategy consistently within a template.
+
+───────────────────────────────────────────────────────────────
+FOOTER
+───────────────────────────────────────────────────────────────
+
+Last line of the output file, after a --- divider:
+  *Provided by [mdblu](https://github.com/ruco-ai/mdblu)*
+
+Do not modify this line. Do not add dates, versions, or links.
+
+───────────────────────────────────────────────────────────────
+CLAUDE.md PAIRING — required before every PR
+───────────────────────────────────────────────────────────────
+
+Every new template needs two additions to CLAUDE.md:
+
+1. Description entry under the appropriate heading:
+   **TEMPLATE_NAME.md** — Use when <trigger condition>. Output
+   is <what the document contains>.
+
+2. Row in the "Choosing Between Similar Templates" table:
+   | <user need> | TEMPLATE_NAME.md |
+═══════════════════════════════════════════════════════════════
+-->
+
+<!--
+INSTRUCTIONS FOR THE MODEL:
+
+Your output must be this document with every section filled in.
+Do not write prose, summaries, or commentary outside the structure.
+Replace every {{PLACEHOLDER}} with the appropriate content.
+Remove all HTML comments (including this block) from the output.
+Do not add, remove, or reorder sections.
+Do not leave any section empty or containing placeholder text.
+Replace the scaffold sections below with the actual sections for
+this template — rename, add, or remove them to fit the template's
+purpose. Every section must have a single clear responsibility.
+-->
+
+# {{TEMPLATE_TITLE}}
+
+## Overview
+
+> {{PROMPT}}
+
+{{PURPOSE_ONE_LINER}}
+
+---
+
+## {{SECTION_1_TITLE}}
+
+{{SECTION_1_CONTENT}}
+
+---
+
+## {{SECTION_2_TITLE}}
+
+{{SECTION_2_CONTENT}}
+
+---
+
+<!--
+CONTRIBUTION CHECKLIST — Delete this block before opening a PR.
+
+- [ ] title, type, and tags are filled with canonical values
+- [ ] Instruction block opens with "INSTRUCTIONS FOR THE MODEL:"
+- [ ] Instruction block contains all six required common rules
+- [ ] Every {{PLACEHOLDER}} is UPPERCASE_SNAKE_CASE
+- [ ] {{PROMPT}} appears as a blockquote (> {{PROMPT}}) in the first content section
+- [ ] Sections use H2 for top-level, H3 for subsections
+- [ ] [BOT] / [HUMAN] tags are on list items only (if applicable)
+- [ ] Optional sections are explicitly marked as such in the instruction block
+- [ ] Footer is exactly: *Provided by [mdblu](https://github.com/ruco-ai/mdblu)*
+- [ ] CLAUDE.md updated: description entry + choosing-between table row
+- [ ] TAGS.md updated: new row in "Tag Usage by Template" table
+-->
+
+---
+
+*Provided by [mdblu](https://github.com/ruco-ai/mdblu)*
