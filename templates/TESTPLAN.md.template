@@ -1,0 +1,95 @@
+---
+title: "Test Plan"
+type: testing
+tags: [testing, qa, verification]
+---
+
+# Test Plan: {{PROJECT_NAME}}
+
+**Date:** {{DATE}}
+**Author:** {{AUTHOR}}
+**Status:** Draft
+
+---
+
+<!--
+INSTRUCTIONS FOR THE MODEL:
+Your output must be this document with every section filled in. Do not write prose summaries or commentary outside the template structure.
+The prompt below describes the project or feature to be tested. Use it to populate every section.
+- Test Strategy: choose the right levels (unit / integration / e2e) for this project and justify.
+- Test Environment: be specific — Node version, test runner, install command, how to execute.
+- Test Cases: derive from actual function signatures, CLI behavior, and user-facing contracts.
+  For each case: ID, what is under test, input, expected output, and whether it is an edge case.
+- Coverage Goals: name the critical paths explicitly, not generic percentages.
+- Known Gaps: anything that cannot be reasonably tested and why.
+- Remove HTML comments from the final output.
+- Do not leave generic placeholder text or empty cells.
+- Do not add, remove, or reorder sections.
+-->
+
+## Overview
+
+> {{PROMPT}}
+
+---
+
+## Test Strategy
+
+<!-- Which levels are tested (unit / integration / e2e) and why. Name the test runner and justify the choice over alternatives. -->
+
+## Test Environment
+
+```
+# Install test runner
+{{INSTALL_COMMAND}}
+
+# Run tests
+{{RUN_COMMAND}}
+```
+
+**Requirements:** {{REQUIREMENTS}}
+
+## Unit Test Cases
+
+Pure-function tests — no I/O, no network, no filesystem.
+
+| ID | Module | Function / Path | Input | Expected Output | Edge? |
+|----|--------|-----------------|-------|-----------------|-------|
+| U01 | | | | | |
+
+## Integration Test Cases
+
+Tests that span multiple modules or require real I/O (filesystem, subprocess), but still no external network calls.
+
+| ID | Modules | Scenario | Setup | Expected Outcome | Edge? |
+|----|---------|----------|-------|------------------|-------|
+| I01 | | | | | |
+
+## Manual / E2E Scenarios
+
+Steps a human would follow to verify the full pipeline end-to-end against a real GitHub repo. Run these before each release.
+
+| ID | Scenario | Steps | Pass Criteria |
+|----|----------|-------|---------------|
+| E01 | | | |
+
+## Coverage Goals
+
+<!-- Name the critical paths and invariants that must be covered. Avoid generic percentages. -->
+
+- **Must cover:**
+  -
+- **Nice-to-have:**
+  -
+
+## Known Gaps
+
+<!-- What cannot be tested automatically and why. Include a mitigation for each. -->
+
+| Gap | Reason | Mitigation |
+|-----|--------|------------|
+| | | |
+
+---
+
+*Made with [mdblu](https://github.com/ruco-ai/mdblu) · source: `templates/TESTPLAN.md.template`*
