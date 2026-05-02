@@ -1,0 +1,69 @@
+---
+title: "Project Roadmap"
+type: planning
+tags: [planning, reference, documentation]
+---
+
+<!--
+INSTRUCTIONS FOR THE MODEL:
+
+Your output must be this document with every section filled in.
+Do not write prose, summaries, or commentary outside the structure.
+Replace every {{PLACEHOLDER}} with the appropriate content.
+Remove all HTML comments (including this block) from the output.
+Do not add, remove, or reorder sections.
+Do not leave any section empty or containing placeholder text.
+You may add or remove milestone subsections (###) under "Planned Work" to match the milestones in your Milestones table — this is the only structural change allowed.
+Status values must be one of: Not Started | In Progress | Done | Blocked | Deferred.
+Dates should be ISO format (YYYY-MM-DD) or a quarter label (e.g. Q3 2026). Use "TBD" only if the date is genuinely unknown.
+If there are no known dependencies or risks, write "None identified." in the Dependencies & Risks table body.
+-->
+
+# {{PROJECT_NAME}} Roadmap
+
+## Overview
+
+> {{PROMPT}}
+
+{{ROADMAP_SUMMARY}}
+
+---
+
+## Milestones
+
+| Milestone | Target | Status | Description |
+|-----------|--------|--------|-------------|
+| {{MILESTONE_1_NAME}} | {{MILESTONE_1_TARGET}} | {{MILESTONE_1_STATUS}} | {{MILESTONE_1_DESCRIPTION}} |
+| {{MILESTONE_2_NAME}} | {{MILESTONE_2_TARGET}} | {{MILESTONE_2_STATUS}} | {{MILESTONE_2_DESCRIPTION}} |
+
+---
+
+## Planned Work
+
+### {{MILESTONE_1_NAME}}
+
+- {{MILESTONE_1_ITEM}}
+- {{MILESTONE_1_ITEM}}
+
+### {{MILESTONE_2_NAME}}
+
+- {{MILESTONE_2_ITEM}}
+- {{MILESTONE_2_ITEM}}
+
+---
+
+## Out of Scope
+
+{{OUT_OF_SCOPE_DESCRIPTION}}
+
+---
+
+## Dependencies & Risks
+
+| Item | Type | Impact | Notes |
+|------|------|--------|-------|
+| {{DEPENDENCY_OR_RISK_NAME}} | Dependency / Risk | High / Medium / Low | {{NOTES}} |
+
+---
+
+*Provided by [mdblu](https://github.com/ruco-ai/mdblu)*
