@@ -1,5 +1,5 @@
 {
-  "name": "mdblu",
+  "name": "@ruco-ai/mdblu",
   "version": "1.0.0",
   "description": "CLI tool to list and download mdblu markdown templates into your project",
   "main": "bin/mdblu.js",
@@ -22,7 +22,5 @@
   "engines": {
     "node": ">=18"
   },
-  "dependencies": {
-    "mdblu": "^1.0.0"
-  }
+  "dependencies": {}
 }

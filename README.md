@@ -46,6 +46,7 @@ They are interdependent: adding or updating a template always means updating CLA
 | `ADR.md` | Record a single architectural decision |
 | `PLAYBOOK.md` | Write a repeatable operational procedure |
 | `SKILL.md` | Document a reusable AI agent capability |
+| `SKILLS-README.md` | Index of skills in a domain subfolder |
 | `TODO.md` | Simple standalone task list |
 
 All templates live in [`/templates`](templates/) and are open for contribution.
@@ -77,9 +78,9 @@ mdblu ships as an npm package with a CLI for scaffolding templates directly into
 ### Install
 
 ```bash
-npm install -g mdblu
+npm install -g @ruco-ai/mdblu
 # or use without installing:
-npx mdblu
+npx @ruco-ai/mdblu
 ```
 
 ### Commands
@@ -121,7 +122,7 @@ The server reads templates and `CLAUDE.md` directly from this repository at requ
 ### Add to Claude Code
 
 ```bash
-claude mcp add --transport http mdblu https://mdblu.fly.dev/mcp
+claude mcp add --transport http @ruco-ai/mdblu https://mdblu.fly.dev/mcp
 ```
 
 ### Add to Claude Desktop

@@ -2,7 +2,7 @@
 
 This repo is a collection of markdown templates for AI-assisted software development workflows. Each template is filled by the AI from a prompt and output as a structured document.
 
-The repo also ships as an npm package (`mdblu`) with a CLI that lets users scaffold a `.mdblu/` directory containing downloaded templates and a `CLAUDE.md` stub.
+The repo also ships as an npm package (`@ruco-ai/mdblu`) with a CLI that lets users scaffold a `.mdblu/` directory containing downloaded templates and a `CLAUDE.md` stub.
 
 ---
 
@@ -81,6 +81,8 @@ The package has not yet been published to npm. Run `npm publish` (requires npm c
 
 **GH-PROJECT.md** — Use when the user wants to define a GitHub Project (fields, items, owners) as a markdown file that can be pushed to GitHub via `scripts/gh-project-push.js`. The AI fills in the project metadata, custom fields, and initial items from the prompt.
 
+**TEMPLATE.md** — Use when no existing template fits the current task and a new one needs to be authored. Guides the agent (or human) through all mdblu conventions: frontmatter, HTML instructions, [BOT]/[HUMAN] tagging, footer, and contribution checklist. Output is a `.md.template` file ready to be PRed to mdblu. Use this before creating any new template from scratch — never invent template structure ad hoc.
+
 ---
 
 ## Choosing Between Similar Templates
@@ -98,6 +100,7 @@ The package has not yet been published to npm. Run `npm publish` (requires npm c
 | A single technical decision | ADR.md |
 | A repeatable ops procedure | PLAYBOOK.md |
 | Create a GitHub Project with fields + items | GH-PROJECT.md |
+| Author a new mdblu template | TEMPLATE.md |
 
 ## Scripts
 
