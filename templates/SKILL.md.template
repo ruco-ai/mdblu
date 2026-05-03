@@ -1,62 +1,186 @@
 ---
-title: "Agent Skill"
-type: documentation
-tags: [documentation, agent-skill, ai-workflow]
+title: "{{SKILL_TITLE}}"
+type: skill
+description: "{{ONE_LINE_DESCRIPTION}}"
+use_when: "{{ONE_SENTENCE_TRIGGER}}"
+output_type: "{{OUTPUT_TYPE}}"
+tags: [{{TAGS}}]
+related_skills: [{{RELATED_SKILLS}}]
 ---
 
-# Skill: {{PROJECT_NAME}}
+<!--
+═══════════════════════════════════════════════════════════════
+SKILL TEMPLATE — GUIDE FOR HUMANS AND AI AGENTS
+═══════════════════════════════════════════════════════════════
+
+A skill file is an executable specification for a reusable agent
+capability. It must be useful to two audiences simultaneously:
+
+  1. A ROUTING AGENT deciding which skill to invoke
+     → reads frontmatter only (title, description, use_when,
+       output_type, tags, related_skills)
+
+  2. AN EXECUTING AGENT performing the skill
+     → reads the full body (Behavior, Instructions, Example)
+
+Both audiences must be served. A skill that is easy to invoke but
+vague to execute — or detailed but undiscoverable — is broken.
+
+───────────────────────────────────────────────────────────────
+FRONTMATTER FIELD GUIDE
+───────────────────────────────────────────────────────────────
+
+title
+  The skill's name. Use a clear noun phrase, not "Agent Skill".
+  Good: "CTA Clarity Optimization"
+  Bad:  "Agent Skill"
+
+description
+  One sentence. What does this skill do and for whom?
+  This is shown in skill indexes — make it scannable.
+  Good: "Rewrites vague CTAs into explicit, intent-aligned actions."
+  Bad:  "Optimizes calls to action."
+
+use_when
+  One sentence. The precise condition that should trigger this skill.
+  Written as an if-clause the routing agent can match against context.
+  Good: "Use when a CTA is generic, performs poorly, or its destination is unclear."
+  Bad:  "Use for CTA improvement."
+
+output_type
+  One of: strategy | copy | audit | structure | analysis | recommendation
+  Lets agents filter skills by the kind of output they need.
+
+tags
+  Domain tags. Be specific enough to distinguish from sibling skills.
+  Prefer: [seo, cta, conversion, micro-copy]
+  Avoid:  [content, marketing] — too broad to disambiguate
+
+related_skills
+  Skills that are commonly chained with this one.
+  List by filename without extension.
+  Example: [topic-expansion-topical-authority, aeo-ai-visibility]
+
+───────────────────────────────────────────────────────────────
+BODY WRITING GUIDE
+───────────────────────────────────────────────────────────────
+
+Overview
+  A one-sentence elevator pitch. Should match `description` in tone
+  but can be slightly longer. Use a blockquote (>).
+
+Skill Description
+  One paragraph. Cover: what it does, why it exists, and when it
+  is especially effective. Mention the domain or industry if relevant.
+
+Trigger Conditions
+  Concrete, distinct situations — not reformulations of the title.
+  Each bullet should describe a state of the world, not a goal.
+  Good: "Users drop off at the first form field"
+  Bad:  "When you want to improve conversions"
+
+Input / Output tables
+  Use real parameter names, real types, real descriptions.
+  Avoid: "value", "data", "object" as descriptions.
+  Mark optional fields clearly. Include expected formats or enums
+  for constrained values (e.g. intent_stage: awareness|consideration|decision).
+
+Behavior — Happy Path
+  These steps must tell the agent HOW to act, not just WHAT happens.
+  Include heuristics, criteria, and decision logic.
+  Bad:  "1. Identify ambiguity in CTA text"
+  Good: "1. Flag CTAs that use generic verbs (learn, submit, click, go,
+            explore) or omit the destination. Treat these as ambiguous."
+
+Behavior — Edge Cases
+  Each case must name the situation AND how to handle it differently.
+  Bad:  "Highly regulated industries"
+  Good: "Regulated industries (finance, healthcare): avoid outcome claims
+         in CTA copy; use neutral directional language instead."
+
+Instructions
+  The operative section — the actual prompt the agent follows.
+  Write imperatives. Be specific. Reference the input parameters by name.
+  This section is what separates a spec document from an executable skill.
+
+Example
+  Show a realistic, non-trivial input and a rich output.
+  The output should demonstrate reasoning depth, not just list bullets.
+  One strong example beats three shallow ones.
+
+Dependencies
+  Only list real, external dependencies: named APIs, tools, or data
+  the skill cannot function without. Omit internal capabilities.
+  Bad:  "Content analysis capability"
+  Good: "Search console data (optional, improves prioritization)"
+
+Notes
+  Caveats, known failure modes, or non-obvious constraints only.
+  Do not restate what the description already says.
+
+───────────────────────────────────────────────────────────────
+MODEL INSTRUCTIONS (remove this block from final output)
+───────────────────────────────────────────────────────────────
+- Fill every section. Do not leave placeholders or empty cells.
+- Do not add, remove, or reorder sections.
+- Do not write prose outside the template structure.
+- Replace ALL {{PLACEHOLDERS}} including in frontmatter.
+- The Instructions section is required — it is the behavioral core.
+- Remove all HTML comment blocks (<!-- -->) from the final output.
+═══════════════════════════════════════════════════════════════
+-->
+
+# Skill: {{SKILL_TITLE}}
 
 **Date:** {{DATE}}
 **Author:** {{AUTHOR}}
 
 ---
 
-<!--
-INSTRUCTIONS FOR THE MODEL:
-Your output must be this document with every section filled in. Do not write prose, summaries, or commentary outside the template structure.
-The prompt below describes an AI skill (a reusable agent capability) to be documented. Use it to populate each section.
-- Trigger Conditions: exact situations that should invoke this skill.
-- Input/Output tables: real parameters and return values, not generic placeholders.
-- Behavior: actual happy path and edge cases for this specific skill.
-- Example: a realistic input/output pair derived from the prompt.
-- Remove HTML comments from the final output.
-- Do not leave placeholder text, generic labels, or empty cells.
-- Do not add, remove, or reorder sections.
--->
-
 ## Overview
 
-> {{PROMPT}}
+> {{ONE_LINE_DESCRIPTION}}
 
 ---
 
 ## Skill Description
 
-<!-- What does this skill do and why does it exist? One clear paragraph. -->
+<!-- One paragraph: what it does, why it exists, when it's most effective. -->
+
+---
 
 ## Trigger Conditions
 
 Invoke this skill when:
 
--
--
--
+- <!-- Concrete situation, not a goal -->
+- <!-- Concrete situation, not a goal -->
+- <!-- Concrete situation, not a goal -->
+
+---
 
 ## Input
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-|           |      |          |             |
+| | | Yes | |
+| | | No | |
+
+---
 
 ## Output
 
 | Field | Type | Description |
 |-------|------|-------------|
-|       |      |             |
+| | | |
+
+---
 
 ## Behavior
 
 ### Happy Path
+
+<!-- Steps must describe HOW to act, not just what happens. Include criteria and heuristics. -->
 
 1.
 2.
@@ -64,29 +188,59 @@ Invoke this skill when:
 
 ### Edge Cases
 
-<!-- What inputs or states require special handling? -->
+<!-- Each case: name the situation AND how to handle it differently. -->
 
 -
 -
+
+---
+
+## Instructions
+
+<!--
+The operative prompt. Write imperatives. Be specific.
+Reference input parameters by name. This is what the executing agent follows.
+-->
+
+Given `{{primary_input}}`, perform the following:
+
+1.
+2.
+3.
+
+If `{{optional_input}}` is provided, use it to...
+
+Return the result as `{{primary_output}}`.
+
+---
 
 ## Example
 
 ```
 Input:
+  # show realistic, non-trivial values for all required parameters
 
 Output:
+  # show rich output that demonstrates reasoning depth, not just bullets
 ```
+
+---
 
 ## Dependencies
 
-<!-- Tools, APIs, or services this skill relies on -->
+<!-- Real, external dependencies only. Omit vague internal capabilities. -->
 
 -
 
+---
+
 ## Notes
 
-<!-- Caveats, known limitations, or implementation gotchas -->
+<!-- Caveats, failure modes, or non-obvious constraints only. -->
 
 ---
 
 *Provided by [mdblu](https://github.com/ruco-ai/mdblu)*
+
+---
+*Made with [mdblu](https://github.com/ruco-ai/mdblu) · source: `templates/SKILL.md.template`*

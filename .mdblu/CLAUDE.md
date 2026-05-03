@@ -79,6 +79,8 @@ The package has not yet been published to npm. Run `npm publish` (requires npm c
 
 **TODO.md** — Use when the user needs a simple, standalone task list not tied to a mission or bootstrap sequence.
 
+**GH-PROJECT.md** — Use when the user wants to define a GitHub Project (fields, items, owners) as a markdown file that can be pushed to GitHub via `scripts/gh-project-push.js`. The AI fills in the project metadata, custom fields, and initial items from the prompt.
+
 ---
 
 ## Choosing Between Similar Templates
@@ -95,6 +97,17 @@ The package has not yet been published to npm. Run `npm publish` (requires npm c
 | File-level codebase reference | STRUCTURE.md |
 | A single technical decision | ADR.md |
 | A repeatable ops procedure | PLAYBOOK.md |
+| Create a GitHub Project with fields + items | GH-PROJECT.md |
+
+## Scripts
+
+**scripts/gh-project-push.js** — Reads a filled `GH-PROJECT.md` and creates the GitHub Project, custom fields, and items via the `gh` CLI.
+
+```
+node scripts/gh-project-push.js <path-to-GH-PROJECT.md>
+```
+
+Requires: `gh` CLI installed and authenticated (`gh auth login`), Node >=18.
 
 ---
 
