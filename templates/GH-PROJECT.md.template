@@ -14,20 +14,20 @@ tags: [task-management, planning, metadata]
 <!--
 INSTRUCTIONS FOR THE MODEL:
 Your output must be this document with every section filled in. Do not write prose, summaries, or commentary outside the template structure.
-The prompt below describes a project, team, or workflow. Use it to define a GitHub Project with appropriate fields and initial items.
+The prompt below describes a project, team, or workflow. Use it to define a GitHub Project with real GitHub issues organised as parent issues and sub-issues.
 
 Rules:
-- Project: fill title, owner (GitHub org or username), repo (owner/repo where issues will be created), visibility (public or private), and a short description.
-- Fields: define custom fields beyond the built-in Status field. Do NOT include Status — it is created automatically by GitHub Projects and cannot be redefined. Use additional fields only when genuinely needed (e.g. Priority, Estimate, Sprint).
-- Field types: TEXT | NUMBER | DATE | SINGLE_SELECT | ITERATION
-- For SINGLE_SELECT fields, list options comma-separated in the Options column. For all other types, leave Options blank.
-- Items: all items are real GitHub issues (type ISSUE). Do not use DRAFT.
-  - New issues: fill title and body. Leave parent blank for top-level issues.
-  - Sub-issues: fill title, body, and parent (exact title of the parent issue). Sub-issues are linked via the GitHub sub-issues API.
-  - To reference an existing issue or PR instead of creating one, fill repo (owner/repo) and number. Leave title, body, and parent blank.
+- Project: fill title, owner (GitHub username or org), repo (owner/repo where new issues will be created), visibility (public or private), and a short description.
+- Fields: optional custom fields beyond the built-in Status. Do NOT include Status — it is always present in GitHub Projects and cannot be redefined. Leave the table empty if no extra fields are needed.
+  - Field types: TEXT | NUMBER | DATE | SINGLE_SELECT | ITERATION
+  - For SINGLE_SELECT, list options comma-separated in the Options column. Leave Options blank for all other types.
+- Items: all items are real GitHub issues (type ISSUE).
+  - Organise work as parent issues (one per area or epic) with sub-issues for individual tasks.
+  - Parent issues: leave parent blank.
+  - Sub-issues: set parent to the exact title of the parent issue.
   - assignee: GitHub username with @ prefix, or leave blank.
-  - status: must match one of the Status options (Todo, In Progress, In Review, Done).
-- Organise work as parent issues (one per area or epic) with sub-issues for individual tasks.
+  - status: Todo | In Progress | In Review | Done.
+  - To reference an existing issue or PR instead of creating a new one, add repo (owner/repo) and number columns and fill those instead of title/body/parent.
 - Remove HTML comments from the final output.
 - Do not add, remove, or reorder sections.
 - Do not leave placeholder text or empty required cells.
@@ -45,8 +45,8 @@ Rules:
 | Field | Value |
 |-------|-------|
 | title | {{PROJECT_NAME}} |
-| owner | <!-- GitHub org or username (e.g. my-org or my-username) --> |
-| repo | <!-- owner/repo where new issues will be created (e.g. my-org/my-repo) --> |
+| owner | <!-- GitHub username or org --> |
+| repo | <!-- owner/repo where new issues will be created --> |
 | visibility | <!-- public or private --> |
 | description | <!-- One-sentence summary of the project's purpose --> |
 
@@ -54,7 +54,7 @@ Rules:
 
 ## Fields
 
-<!-- Additional custom fields only. Do NOT add Status — it is built-in. Column order must be preserved. -->
+<!-- Optional extra fields. Do NOT add Status — it is built-in. Leave the table body empty if none are needed. -->
 
 | name | type | options |
 |------|------|---------|
@@ -63,13 +63,12 @@ Rules:
 
 ## Items
 
-<!-- All items are real GitHub issues (type ISSUE). Column order must be preserved. -->
-<!-- New issue: fill title + body. Sub-issue: also fill parent (exact title of parent issue). -->
-<!-- Existing issue/PR: fill repo (owner/repo) + number instead. -->
+<!-- All items are real GitHub issues (type ISSUE). Parent issues have no parent value. Sub-issues reference their parent by exact title. -->
 
-| type | title | body | parent | repo | number | assignee | status |
-|------|-------|------|--------|------|--------|----------|--------|
-| ISSUE |  |  |  |  |  | <!-- @username --> | Todo |
+| type | title | body | parent | assignee | status |
+|------|-------|------|--------|----------|--------|
+| ISSUE | <!-- parent issue title --> |  |  | <!-- @username --> | Todo |
+| ISSUE | <!-- sub-issue title --> |  | <!-- exact parent title --> | <!-- @username --> | Todo |
 
 ---
 
