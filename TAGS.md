@@ -51,10 +51,12 @@ This document defines all valid tags used in mdblu template frontmatter. Tags ar
 | `PLAYBOOK.md.template` | `documentation`, `runbook`, `reference` |
 | `PROJECTINSIGHTS.md.template` | `metadata`, `insights`, `ai-workflow` |
 | `README.md.template` | `documentation`, `reference` |
+| `ROADMAP.md.template` | `planning`, `reference`, `documentation` |
 | `REPO.md.template` | `metadata`, `reference` |
 | `SKILL.md.template` | `documentation`, `agent-skill`, `ai-workflow` |
 | `SPEC.md.template` | `planning`, `specification`, `scoping` |
 | `STRUCTURE.md.template` | `documentation`, `architecture`, `reference` |
+| `TEMPLATE.md.template` | `conventions`, `ai-workflow`, `reference` |
 | `TODO.md.template` | `task-management`, `planning` |
 
 ---
