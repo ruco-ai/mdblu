@@ -32,6 +32,7 @@ They are interdependent: adding or updating a template always means updating CLA
 |---|---|
 | `SPEC.md` | Plan a feature end-to-end before touching code |
 | `MISSION.md` | Scope a single, concrete agent task |
+| `MISSION-LOG.md` | Persistent document covering the full mission lifecycle: brief → execution → report |
 | `BOOTSTRAP.md` | Decompose a SPEC into an ordered, tagged task list |
 | `OPEN-QUESTIONS.md` | Surface blockers that only the developer can resolve |
 | `CODING-NOTES.md` | Establish conventions at the start of an implementation session |
@@ -50,11 +51,23 @@ They are interdependent: adding or updating a template always means updating CLA
 
 All templates live in [`/templates`](templates/) and are open for contribution.
 
-**Naming convention:** templates named `{FOO}-README.md.template` are designed to fill to `README.md` — the output filename is encoded in the template name.
+---
 
-### Template Metadata
+## Task tagging convention
 
-Every template includes YAML frontmatter with `title`, `type`, and `tags` fields. Tags enable tools and agents to filter, categorize, and index templates by metadata without parsing prose. The full tag taxonomy and a cross-reference table mapping each template to its tags are defined in [`TAGS.md`](TAGS.md) at the repo root.
+Templates that include tasks or deliverables tag every item `[BOT]` or `[HUMAN]`:
+
+```markdown
+- [ ] [BOT]: Implement authentication
+- [ ] [HUMAN]: Review security model before deploying
+```
+
+- `[BOT]` — implementable by an AI agent from the document alone
+- `[HUMAN]` — requires human judgment, coordination, or external input
+
+This convention is the contract between a filled document and any workflow tool that processes it. Workflow tools scan for this pattern to create issues, track progress, and sync state — they do not rely on a specific section name, so the pattern works across any template.
+
+**When designing a new template:** if it has tasks, deliverables, or a step sequence, use the `[BOT]`/`[HUMAN]` checkbox format. This makes the template processable by tools without any template-specific parsing logic.
 
 ---
 
@@ -78,8 +91,6 @@ npx @ruco-ai/mdblu
 mdblu list
 ```
 
-Fetches and prints all available templates from the repository.
-
 **Download specific templates:**
 
 ```bash
@@ -87,12 +98,6 @@ mdblu get SPEC.md MISSION.md
 ```
 
 Downloads the named templates into `.mdblu/templates/` and writes a `CLAUDE.md` stub to `.mdblu/CLAUDE.md`.
-
-Use `--output <dir>` to scaffold into a custom directory instead of `.mdblu/`:
-
-```bash
-mdblu get SPEC.md MISSION.md --output my-docs
-```
 
 **Download all templates:**
 
@@ -106,45 +111,13 @@ mdblu get --all
 mdblu update
 ```
 
-Re-downloads all templates currently present in `.mdblu/templates/`, pulling in any upstream changes. Does not modify `.mdblu/CLAUDE.md`.
-
-```bash
-mdblu update SPEC.md MISSION.md
-```
-
-Updates only the named templates. Each template is reported as updated, skipped (not found upstream), or failed. Exits with code 1 if any template fails.
-
-**Interactive mode** (no arguments):
-
-```bash
-mdblu
-```
-
-Displays a numbered checklist of all available templates. Enter comma-separated indices or `all` to scaffold your selection.
-
-Use `--output <dir>` to scaffold into a custom directory:
-
-```bash
-mdblu --output my-docs
-```
-
-### Scaffold output
-
-Running any `get` command (or interactive mode) creates:
-
-```
-<output-dir>/        ← defaults to .mdblu/
-  templates/         ← downloaded .template files
-  CLAUDE.md          ← always written
-```
-
 ---
 
 ## MCP Server
 
 mdblu runs as an MCP server at `https://mdblu.fly.dev/mcp`, so any MCP-compatible AI tool can pull templates on demand.
 
-The server reads templates and `CLAUDE.md` directly from this repository at request time — no redeploy needed when templates change. Responses are cached for 5 minutes.
+The server reads templates and `CLAUDE.md` directly from this repository at request time — no redeploy needed when templates change.
 
 ### Add to Claude Code
 
@@ -153,8 +126,6 @@ claude mcp add --transport http @ruco-ai/mdblu https://mdblu.fly.dev/mcp
 ```
 
 ### Add to Claude Desktop
-
-In your `claude_desktop_config.json`:
 
 ```json
 {
@@ -167,25 +138,15 @@ In your `claude_desktop_config.json`:
 }
 ```
 
-### Add to any MCP-compatible client
-
-Point your client at:
-
-```
-https://mdblu.fly.dev/mcp
-```
-
-with transport `http`. No auth required.
-
 ### Available tools and prompts
 
 | Name | Type | Description |
 |---|---|---|
-| `list_templates` | tool | List all available templates |
-| `get_template` | tool | Fetch a template by name |
+| `use_template` | tool | Fetch a template by name + return filling instructions with suggested filename |
 | `propose_template_update` | tool | Open a GitHub PR with an improved version of a template |
-| `how_to_use` | prompt | Instructs the agent to pick and fill the right template |
-| `propose_update` | prompt | Instructs the agent to critically evaluate and propose a template improvement |
+| `scaffold_hook` | tool | Returns a PostToolUse hook config for automatic template improvement detection |
+| `use_doc` | prompt | Re-enter a workflow using a filled document as authoritative context |
+| `propose_update` | prompt | Critically evaluate and propose a template improvement |
 
 ---
 
@@ -195,7 +156,7 @@ Once connected, ask your AI agent to use a template by name:
 
 > "Write a SPEC for the new notifications system."
 
-> "Create a MISSION for migrating the auth module."
+> "Create a MISSION-LOG for the auth migration."
 
 > "Generate a HANDOFF for what we built today."
 
@@ -212,10 +173,9 @@ mdblu is intentionally open and collaborative. Templates are plain Markdown — 
 1. Fork the repo
 2. Add or edit the template in `/templates`
 3. Update `CLAUDE.md` — add or revise the entry that tells agents when and how to use the template
-4. Add tags to the template's YAML frontmatter using the taxonomy in `TAGS.md`; update `TAGS.md` if introducing a new tag
-5. Open a PR
+4. Open a PR
 
-The rule: **every template change must be paired with a CLAUDE.md update.** Templates without a corresponding CLAUDE.md entry won't be used correctly by agents.
+The rule: **every template change must be paired with a CLAUDE.md update.**
 
 **AI-assisted contributions** — any agent connected to the MCP server can propose template improvements directly by using the `propose_update` prompt. It will open a PR only if the change clears the bar: durable improvement, structural gap, no task-specific bleed, minimal diff.
 
@@ -225,7 +185,7 @@ The rule: **every template change must be paired with a CLAUDE.md update.** Temp
 
 - **Fill every section.** No placeholders, no empty cells, no "TBD" without a reason.
 - **Remove HTML comments from output.** They're instructions for the model, not content.
-- **Tag agent vs. human work.** `[BOT]` for what an AI can do autonomously. `[HUMAN]` for checkpoints that require judgment.
+- **Tag agent vs. human work.** `[BOT]` for what an AI can do autonomously. `[HUMAN]` for checkpoints that require judgment. Any template with tasks must use this format.
 - **Templates and CLAUDE.md are a pair.** One without the other is incomplete.
 
 ---
