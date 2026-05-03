@@ -17,15 +17,17 @@ Your output must be this document with every section filled in. Do not write pro
 The prompt below describes a project, team, or workflow. Use it to define a GitHub Project with appropriate fields and initial items.
 
 Rules:
-- Project: fill title, owner (GitHub org or username), visibility (public or private), and a short description.
-- Fields: define custom fields that reflect how this project tracks work. Common choices: Status, Priority, Sprint, Estimate, Due Date. Always include a Status field as SINGLE_SELECT.
+- Project: fill title, owner (GitHub org or username), repo (owner/repo where issues will be created), visibility (public or private), and a short description.
+- Fields: define custom fields beyond the built-in Status field. Do NOT include Status — it is created automatically by GitHub Projects and cannot be redefined. Use additional fields only when genuinely needed (e.g. Priority, Estimate, Sprint).
 - Field types: TEXT | NUMBER | DATE | SINGLE_SELECT | ITERATION
 - For SINGLE_SELECT fields, list options comma-separated in the Options column. For all other types, leave Options blank.
-- Items: list the initial work items for this project.
-  - type DRAFT: a new draft issue (requires title and body). Leave repo and number blank.
-  - type ISSUE or PR: an existing issue or pull request (requires repo as owner/repo and number). Leave title and body blank.
+- Items: all items are real GitHub issues (type ISSUE). Do not use DRAFT.
+  - New issues: fill title and body. Leave parent blank for top-level issues.
+  - Sub-issues: fill title, body, and parent (exact title of the parent issue). Sub-issues are linked via the GitHub sub-issues API.
+  - To reference an existing issue or PR instead of creating one, fill repo (owner/repo) and number. Leave title, body, and parent blank.
   - assignee: GitHub username with @ prefix, or leave blank.
-  - status: must match one of the options defined for the Status field exactly.
+  - status: must match one of the Status options (Todo, In Progress, In Review, Done).
+- Organise work as parent issues (one per area or epic) with sub-issues for individual tasks.
 - Remove HTML comments from the final output.
 - Do not add, remove, or reorder sections.
 - Do not leave placeholder text or empty required cells.
@@ -44,6 +46,7 @@ Rules:
 |-------|-------|
 | title | {{PROJECT_NAME}} |
 | owner | <!-- GitHub org or username (e.g. my-org or my-username) --> |
+| repo | <!-- owner/repo where new issues will be created (e.g. my-org/my-repo) --> |
 | visibility | <!-- public or private --> |
 | description | <!-- One-sentence summary of the project's purpose --> |
 
@@ -51,23 +54,26 @@ Rules:
 
 ## Fields
 
-<!-- Custom fields for the project. Column order must be preserved. -->
+<!-- Additional custom fields only. Do NOT add Status — it is built-in. Column order must be preserved. -->
 
 | name | type | options |
 |------|------|---------|
-| Status | SINGLE_SELECT | Todo, In Progress, In Review, Done |
 
 ---
 
 ## Items
 
-<!-- Initial items for the project. Column order must be preserved. -->
-<!-- DRAFT: fill title + body. ISSUE / PR: fill repo (owner/repo) + number. -->
+<!-- All items are real GitHub issues (type ISSUE). Column order must be preserved. -->
+<!-- New issue: fill title + body. Sub-issue: also fill parent (exact title of parent issue). -->
+<!-- Existing issue/PR: fill repo (owner/repo) + number instead. -->
 
-| type | title | body | repo | number | assignee | status |
-|------|-------|------|------|--------|----------|--------|
-| DRAFT |  |  |  |  |  | Todo |
+| type | title | body | parent | repo | number | assignee | status |
+|------|-------|------|--------|------|--------|----------|--------|
+| ISSUE |  |  |  |  |  | <!-- @username --> | Todo |
 
 ---
 
 *Provided by [mdblu](https://github.com/ruco-ai/mdblu)*
+
+---
+*Made with [mdblu](https://github.com/ruco-ai/mdblu) · source: `templates/GH-PROJECT.md.template`*
