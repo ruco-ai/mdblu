@@ -81,6 +81,8 @@ The package has not yet been published to npm. Run `npm publish` (requires npm c
 
 **GH-PROJECT.md** — Use when the user wants to define a GitHub Project (fields, items, owners) as a markdown file that can be pushed to GitHub via `scripts/gh-project-push.js`. The AI fills in the project metadata, custom fields, and initial items from the prompt.
 
+**ROADMAP.md** — Use when the user wants to document a project's planned features, phases, and milestones over time. Output is a structured roadmap with a milestone summary table, per-milestone feature breakdown, out-of-scope items, and dependencies and risks.
+
 **TEMPLATE.md** — Use when no existing template fits the current task and a new one needs to be authored. Guides the agent (or human) through all mdblu conventions: frontmatter, HTML instructions, [BOT]/[HUMAN] tagging, footer, and contribution checklist. Output is a `.md.template` file ready to be PRed to mdblu. Use this before creating any new template from scratch — never invent template structure ad hoc.
 
 ---
@@ -100,6 +102,7 @@ The package has not yet been published to npm. Run `npm publish` (requires npm c
 | A single technical decision | ADR.md |
 | A repeatable ops procedure | PLAYBOOK.md |
 | Create a GitHub Project with fields + items | GH-PROJECT.md |
+| Document planned milestones and features | ROADMAP.md |
 | Author a new mdblu template | TEMPLATE.md |
 
 ## Scripts
